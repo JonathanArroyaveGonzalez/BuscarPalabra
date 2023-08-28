@@ -33,6 +33,7 @@ public class AdministradorDeArchivos {
         if (carpeta.exists() && carpeta.isDirectory()) {
             // Obtener la lista de archivos en la carpeta
             File[] archivos = carpeta.listFiles();
+            int contadorArchivosValidos=0;
 
             // Recorrer los archivos
             for (File archivo : archivos) {
@@ -40,10 +41,15 @@ public class AdministradorDeArchivos {
                     int ocurrenciasEnArchivo = ocurrenciasPorArchivo(archivo);
                     totalOcurrencias += ocurrenciasEnArchivo;
                     System.out.println("Archivo: " + archivo.getName() + " - Ocurrencias: " + ocurrenciasEnArchivo);
+                    contadorArchivosValidos++;
                 }
             }
 
-            System.out.println("Total de ocurrencias en toda la carpeta: " + totalOcurrencias);
+            if(contadorArchivosValidos!=0) {
+                System.out.println("Total de ocurrencias en toda la carpeta: " + totalOcurrencias);
+            }else{
+                System.out.println("No se encontraron archivos de texto con extensión .txt, .xml, .json o .csv ");
+            }
         } else {
             System.out.println("La ruta no es válida o la carpeta no existe.");
         }
